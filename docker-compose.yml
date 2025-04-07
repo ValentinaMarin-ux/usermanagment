@@ -1,0 +1,46 @@
+services:
+  #  --------------------------------------------
+  backend-usermanagment:
+    build:
+      context: ./userManagment
+      dockerfile: Dockerfile
+    container_name: container-userManagment
+    depends_on:
+      mysql-usermanagment:
+        condition: service_healthy
+    ports:
+      - "9020:8080"
+    networks:
+      - userManagment
+  #  --------------------------------------------
+  mysql-usermanagment:
+    build:
+      context: ./MySQL
+      dockerfile: Dockerfile
+    container_name: mysql-usermanagment
+    volumes:
+      - ./MySQL/mysql_data:/var/lib/mysql
+    ports:
+      - "8011:3306"
+    networks:
+      - userManagment
+    healthcheck:
+      test: [ "CMD","mysql", "-u", "finalProject", "-pfinalProject" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  #  --------------------------------------------
+  adminer-usermanagment:
+    image: adminer
+    container_name: adminer-usermanagment
+    depends_on:
+      - mysql-usermanagment
+    ports:
+      - "9010:8080"
+    networks:
+      - userManagment
+#  --------------------------------------------
+networks:
+  userManagment:
+    driver: bridge
+    name: userManagment
