@@ -58,7 +58,7 @@ public class User {
     /**
      * User's encrypted password
      */
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     /**
