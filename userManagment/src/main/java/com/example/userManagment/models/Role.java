@@ -50,12 +50,7 @@ public class Role {
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
-    /**
-     * List of permissions associated with this role
-     */
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-    private List<Permission> permissions;
-
+  
     /**
      * List of users who have been assigned this role
      */

@@ -5,8 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class RoleDTO {
-    
+public class CreateRoleDTO {
 
     @NotBlank(message = "Name is required")
     @Size(max = 50, message = "Name must be less than 50 characters")
@@ -16,4 +15,3 @@ public class RoleDTO {
     @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
 }
-
