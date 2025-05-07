@@ -37,9 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // Verifica si el token existe y es válido
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 // Extrae el nombre de usuario del token
-                String username = tokenProvider.getUsernameFromJWT(jwt);
-                // Carga los detalles del usuario desde la base de datos
-                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+                String email = tokenProvider.getUsernameFromJWT(jwt); // Cambiar 'username' a 'email'
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
 
                 // Crea un token de autenticación con los detalles del usuario
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

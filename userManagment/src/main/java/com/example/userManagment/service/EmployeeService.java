@@ -68,4 +68,9 @@ public class EmployeeService {
             employeeRepository.save(updatedEmployee); // Guardamos el empleado actualizado
         }
     }
+
+
+    public boolean employeeExists(Integer id) {
+        return employeeRepository.existsById(id);
+    }
 }

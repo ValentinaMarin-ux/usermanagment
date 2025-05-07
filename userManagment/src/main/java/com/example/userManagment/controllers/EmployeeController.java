@@ -52,7 +52,8 @@ public class EmployeeController {
 
     // Actualizar un empleado por ID
     @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateEmployee(@Valid @PathVariable Integer id, @Valid @RequestBody UpdateEmployeeDTO updateEmployeeDTO) {
+    public ResponseEntity<Void> updateEmployee(@Valid @PathVariable Integer id,
+            @Valid @RequestBody UpdateEmployeeDTO updateEmployeeDTO) {
         GetEmployeeDTO employee = employeeService.findById(id);
         if (employee == null) {
             return ResponseEntity.notFound().build();
@@ -60,4 +61,16 @@ public class EmployeeController {
         employeeService.updateEmployee(id, updateEmployeeDTO);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<Boolean> checkIfEmployeeExists(@PathVariable Integer id) {
+        try {
+            boolean exists = employeeService.employeeExists(id);
+            return ResponseEntity.ok(exists);
+        } catch (Exception e) {
+            e.printStackTrace(); // Esto imprimirá en la consola la causa
+            return ResponseEntity.status(500).body(false);
+        }
+    }
+
 }
