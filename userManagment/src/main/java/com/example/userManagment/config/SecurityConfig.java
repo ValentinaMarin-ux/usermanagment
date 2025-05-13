@@ -51,13 +51,13 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // Configura las reglas de autorización para las peticiones HTTP
                 .authorizeHttpRequests(auth -> auth
-                        // Permite acceso público a la documentación Swagger
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/api-docs/**", "/v3/api-docs/**")
                         .permitAll()
-                        // Permite acceso público a los endpoints de autenticación
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/employee/exists/**").permitAll()
-                        // Requiere autenticación para todas las demás peticiones
+                        .requestMatchers("/user/add").permitAll() 
+                       
+                        
+ // 👈 Agregado
                         .anyRequest().authenticated())
                 // Agrega nuestro filtro JWT antes del filtro de autenticación por usuario y
                 // contraseña
@@ -66,5 +66,4 @@ public class SecurityConfig {
         return http.build();
     }
 
-    
 }

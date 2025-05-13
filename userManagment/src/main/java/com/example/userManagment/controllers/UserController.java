@@ -2,6 +2,7 @@ package com.example.userManagment.controllers;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,9 @@ import com.example.userManagment.dto.CreateUserDTO;
 import com.example.userManagment.dto.GetUserDTO;
 import com.example.userManagment.dto.UpdateUserDto;
 import com.example.userManagment.dto.UserDTO;
+import com.example.userManagment.models.User;
 import com.example.userManagment.service.UserService;
+import java.util.Optional;  // ✅ Esta es la correcta
 
 import jakarta.validation.Valid;
 
@@ -59,5 +62,27 @@ public class UserController {
         }
         userService.updateUser(id, updateUserDto);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @PostMapping("/{id}/change-password")
+    public ResponseEntity<?> changePassword(
+            @PathVariable Integer id,
+            @RequestParam String oldPassword,
+            @RequestParam String newPassword) {
+        boolean changed = userService.changePassword(id, oldPassword, newPassword);
+        if (changed) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<GetUserDTO> getUserByEmail(@PathVariable String email) {
+        Optional<User> user = userService.getUserByEmail(email);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(userService.findById(user.get().getId()));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
