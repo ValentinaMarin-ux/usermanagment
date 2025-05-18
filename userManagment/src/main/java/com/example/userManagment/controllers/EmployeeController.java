@@ -73,4 +73,10 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/allEmployeesAndContracts")
+    public ResponseEntity<List<GetEmployeeAndContractDTO>> getAllEmployeesAndContracts() {
+        List<GetEmployeeAndContractDTO> employeesAndContracts = employeeService.findEmployeeAndContract();
+        return ResponseEntity.ok(employeesAndContracts);
+    }
+
 }

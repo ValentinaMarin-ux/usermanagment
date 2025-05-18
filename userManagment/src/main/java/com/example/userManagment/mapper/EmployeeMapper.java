@@ -35,4 +35,7 @@ public interface EmployeeMapper {
 
     // Conversión de entidad a DTO para la creación (sin edad calculada)
     CreateEmployeeDTO toCreateEmployeeDTO(Employee employee);
+
+    @Mapping(target = "employeeId", source = "id")
+    GetEmployeeAndContractDTO toGetEmployeeAndContractDTO(Employee employee);
 }

@@ -73,4 +73,12 @@ public class EmployeeService {
     public boolean employeeExists(Integer id) {
         return employeeRepository.existsById(id);
     }
+
+
+    public List<GetEmployeeAndContractDTO> findEmployeeAndContract() {
+        return employeeRepository.findAll()
+                .stream()
+                .map(employeeMapper::toGetEmployeeAndContractDTO)
+                .collect(Collectors.toList());
+    }
 }
