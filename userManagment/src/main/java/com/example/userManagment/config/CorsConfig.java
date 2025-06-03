@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Puedes filtrar aquí si quieres
-                        .allowedOrigins("*") 
+                        .allowedOrigins("http://localhost:8080", "https://main.damw0yiexgk9o.amplifyapp.com") 
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }

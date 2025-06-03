@@ -33,14 +33,14 @@ public class InitialDataLoader implements CommandLineRunner {
         Role rhSchedulesRole = roleRepository.findByName("ROLE_SCHEDULES_MODULE")
                 .orElseGet(() -> roleRepository.save(new Role("ROLE_SCHEDULES_MODULE")));
 
-        Role rhGoalRole = roleRepository.findByName("ROLE_SCHEDULES_MODULE")
-                .orElseGet(() -> roleRepository.save(new Role("ROLE_SCHEDULES_MODULE")));
-
         Role rhPayrollRole = roleRepository.findByName("ROLE_PAYROLL_MODULE")
                 .orElseGet(() -> roleRepository.save(new Role("ROLE_PAYROLL_MODULE")));
 
         Role rhVacationsRole = roleRepository.findByName("ROLE_VACATIONS_MODULE")
                 .orElseGet(() -> roleRepository.save(new Role("ROLE_VACATIONS_MODULE")));
+
+        Role rhGoalRole = roleRepository.findByName("ROLE_GOALS_MODULE")
+                .orElseGet(() -> roleRepository.save(new Role("ROLE_GOALS_MODULE")));
 
         // Crear usuario para ROLE_EMPLOYEE_MODULE
         if (!userRepository.existsByEmail("employee@example.com")) {
@@ -89,8 +89,6 @@ public class InitialDataLoader implements CommandLineRunner {
             user.setRole(rhVacationsRole);
             userRepository.save(user);
         }
-
-        // empleados, marcar tiempos, goals, payroll , vacations
 
     }
 }

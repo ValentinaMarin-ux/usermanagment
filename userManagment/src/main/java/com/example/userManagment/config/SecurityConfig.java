@@ -45,6 +45,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 // Deshabilita CSRF ya que usamos tokens JWT
                 .csrf(csrf -> csrf.disable())
                 // Configura la gestión de sesiones como STATELESS (sin estado)
